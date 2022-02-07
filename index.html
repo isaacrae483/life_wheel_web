@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+    <title>LifeWheel</title>
+</head>
+<body>
+<div class="content">
+    <h1 class="title">LIFE WHEEL</h1>
+    <canvas class="wheel" id="canvas" width=450 height=450></canvas>
+    <br>
+    <div class="colorKeys">
+        <div>
+            <div class="colorBox" id="familyColorBox" style="background-color: red;"></div>
+            <label class="colorBoxLabel" for="familyColorBox">Family</label></div>
+        <div>
+            <div class="colorBox" id="friendsColorBox" style="background-color: blue;"></div>
+            <label class="colorBoxLabel" for="friendsColorBox">Friends</label></div>
+        <div>
+            <div class="colorBox" id="loveColorBox" style="background-color: purple;"></div>
+            <label class="colorBoxLabel" for="loveColorBox">Love</label></div>
+        <div>
+            <div class="colorBox" id="spiritualColorBox" style="background-color: yellow;"></div>
+            <label class="colorBoxLabel" for="spiritualColorBox">Spiritual</label></div>
+        <div>
+            <div class="colorBox" id="careerColorBox" style="background-color: orange;"></div>
+            <label class="colorBoxLabel" for="careerColorBox">Career</label></div>
+        <div>
+            <div class="colorBox" id="moneyColorBox" style="background-color: green;"></div>
+            <label class="colorBoxLabel" for="moneyColorBox">Money</label></div>
+    </div>
+
+    <br>
+    <br>
+    <div class="slider-container">
+        <label class="grid-item" for="familySlider">Family: </label>
+        <input type="range" min="1" max="100" value="50" class="slider grid-item" id="familySlider">
+        <label class="grid-item" for="friendsSlider">Friends: </label>
+        <input type="range" min="1" max="100" value="50" class="slider grid-item" id="friendsSlider">
+        <label class="grid-item" for="loveSlider">Love: </label>
+        <input type="range" min="1" max="100" value="50" class="slider grid-item" id="loveSlider">
+        <label class="grid-item" for="spiritualSlider">Spiritual: </label>
+        <input type="range" min="1" max="100" value="50" class="slider grid-item" id="spiritualSlider">
+        <label class="grid-item" for="careerSlider">Career: </label>
+        <input type="range" min="1" max="100" value="50" class="slider grid-item" id="careerSlider">
+        <label class="grid-item" for="moneySlider">Money: </label>
+        <input type="range" min="1" max="100" value="50" class="slider grid-item" id="moneySlider">
+    </div>
+</div>
+</body>
+</html>
+
+
+<script>
+    var labels = Array("Family", "Friends", "Love", "Spiritual", "Career", "Money");
+    labels["Family"] = 'red';
+    labels["Friends"] = 'blue';
+    labels["Love"] = 'purple';
+    labels["Spiritual"] = 'yellow';
+    labels["Career"] = 'orange';
+    labels["Money"] = 'green';
+
+    function drawCanvas() {
+// canvas references
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        var angleModifier = 9;
+        labels.forEach(function (label) {
+            var radius = (parseInt(document.getElementById(label.toLowerCase() + "Slider").value) + 20) * 1.8;
+            var startAngle = Math.PI * angleModifier / 6;
+            angleModifier += 2;
+            var endAngle = Math.PI * angleModifier / 6;
+            var x = 225;
+            var y = 225;
+            context.beginPath();
+            context.arc(x, y, radius, startAngle, endAngle);
+            context.arc(x, y, 0, endAngle, startAngle, true);
+            context.lineTo(x, y)
+            context.closePath();
+            context.fillStyle = labels[label];
+            context.strokeStyle = 'black';
+            context.fill();
+            context.stroke();
+        })
+
+    }
+
+    drawCanvas()
+</script>
+
+<script>
+    labels.forEach(function (value) {
+        var slider = document.getElementById(value.toLowerCase() + "Slider");
+        slider.oninput = function () {
+            drawCanvas();
+        }
+    })
+</script>

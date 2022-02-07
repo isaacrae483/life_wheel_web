@@ -1,0 +1,48 @@
+label {
+    margin-left: 50px
+}
+
+.slider-container {
+    display: grid;
+    grid-row-gap: 20px;
+    grid-column-gap: 5px;
+    grid-template-columns: 1fr 9fr 1fr 9fr;
+    max-width: 1000px;
+}
+
+.content {
+    max-width: 1000px;
+    margin: auto;
+}
+
+.title {
+    max-width: 205px;
+    margin: auto;
+}
+
+.wheel {
+    max-width: 500px;
+    margin-right: 250px;
+    margin-left: 250px;
+}
+
+.colorBoxLabel {
+    margin: 5px;
+}
+
+.colorBox {
+    width: 25px;
+    height: 10px;
+    display: inline-block;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.colorKeys {
+    border-style: solid;
+    border-width: 1px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding:5px;
+}
